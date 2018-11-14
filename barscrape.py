@@ -24,7 +24,7 @@ for item in data:
     if count <= 10:
     
     
-        print (item.contents[1].find_all("h2",{"class":"listingName"})[0].text) #prints name of restaurant
+        print (item.contents[1].find_all("h2",{"class":"listingName"})[0].text) #prints name of bar
         print item.text
         
         print (item.contents[1].find_all("span")[0].text)
