@@ -1,51 +1,46 @@
+from bs4 import BeautifulSoup
 import requests
-import bs4
+import pandas as pd
 
-url = 'https://www.yellowpages.com/london-oh/bars' 
+url = 'https://www.timeout.com/london/bars-pubs'
 
-r = requests.get(url) #returns the HTML of the page, can be done through urlopen as well
+data = requests.get(url)
+soup = BeautifulSoup(data.text, 'html.parser')
+bars = soup.find("div")
+bar_names=bars.find_all("h3")
+
+#Creating a loop to get clean data without special characters or html tags. Assigning the clean names to a list called 'bar_list'.
+
+bar_list = []
+for b in bar_names[0:]:
+    result = b.text.strip()
+    bar_list.append(result)
 
 
-soup = bs4.BeautifulSoup(r.content)
+print(bar_list)
+bar_list = bar_list[:-9]
+print(bar_list)
+len(bar_list)
+bar_address = bars.find_all("em")
 
 
+address_list = []
+for a in bar_address[0:]:
+    result2 = a.text.strip()
+    address_list.append(result2)
 
-links = soup.find_all("a")
-   
-data = soup.find_all("div",{"class":"serp_tp_list"})
-listNames=[]
-listLoc=[]
-count = 1 #To count the first 10 bars
 
-for item in data:
+print(address_list)
 
-    print item.contents[3]
-        
-    if count <= 10:
-    
-    
-        print (item.contents[1].find_all("h2",{"class":"listingName"})[0].text) #prints name of bar
-        print item.text
-        
-        print (item.contents[1].find_all("span")[0].text)
-        #prints address of bar
-        
-        print item.contents[3].find_all("h3",{"class":"listingProduct"})[0].text
-        
-        print item.contents[3].find_all("div",{"class":"phoneDetails"})[0].text
-        
-         
-      
-        print item.contents[0].find_all("h3",{"class":"listingProduct"})[0].text 
-          
-    count+=1
-   
-data = soup.find_all("div",{"class":"FL serpInrRht bdrL_cdcdcd"})  
-count= 1
-for item in data:
-    if count<=10:
-        
-        print item.contents[1].find_all("p",{"class":"location"})[0].text
-      
-    count+=1      
+
+address_list = address_list[:-1]
+
+print(address_list)
+
+len(address_list)
+
+minn_bars = pd.DataFrame({'Bars': bar_list,'Address & Contact': address_list})
+
+print(minn_bars)
+
 
