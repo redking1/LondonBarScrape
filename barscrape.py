@@ -7,7 +7,10 @@ url = 'https://www.timeout.com/london/bars-pubs'
 data = requests.get(url)
 soup = BeautifulSoup(data.text, 'html.parser')
 bars = soup.find("div")
-bar_names=bars.find_all("h3")
+
+#unsure what tags the bar names lie behind right now
+
+# bar_names=bars.find_all("")
 
 #Creating a loop to get clean data without special characters or html tags. Assigning the clean names to a list called 'bar_list'.
 
