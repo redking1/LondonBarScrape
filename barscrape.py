@@ -21,8 +21,7 @@ for b in bar_names[0:]:
 
 
 print(bar_list)
-bar_list = bar_list[:-9]
-print(bar_list)
+
 len(bar_list)
 bar_address = bars.find_all("em")
 
@@ -36,14 +35,12 @@ for a in bar_address[0:]:
 print(address_list)
 
 
-address_list = address_list[:-1]
 
-print(address_list)
 
 len(address_list)
 
-minn_bars = pd.DataFrame({'Bars': bar_list,'Address & Contact': address_list})
+lon_bars = pd.DataFrame({'Bars': bar_list,'Address & Contact': address_list})
 
-print(minn_bars)
+print(lon_bars)
 
 
